@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Flight Control Verification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .feature-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        .feature-box h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .step-box {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #4caf50;
+        }
+        .step-box h4 {
+            margin: 0 0 10px 0;
+            color: #2e7d32;
+        }
+        .warning-box {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #ffc107;
+        }
+        .warning-box h4 {
+            margin: 0 0 10px 0;
+            color: #856404;
+        }
+        .info-box {
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #17a2b8;
+        }
+        .info-box h4 {
+            margin: 0 0 10px 0;
+            color: #0c5460;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .parameter-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .parameter-table th,
+        .parameter-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .parameter-table th {
+            background-color: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        .parameter-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin: 8px 0;
+        }
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>User Guide</h1>
+        <p>Flight Control Verification Project</p>
+        <p>Complete User Documentation and System Guide</p>
+    </div>
+
+    <div class="section">
+        <h2>Table of Contents</h2>
+        <div class="toc">
+            <h3>Quick Start</h3>
+            <ul>
+                <li><a href="#overview">1. System Overview</a></li>
+                <li><a href="#installation">2. Installation Guide</a></li>
+                <li><a href="#quick-start">3. Quick Start Guide</a></li>
+            </ul>
+            
+            <h3>User Interface</h3>
+            <ul>
+                <li><a href="#web-interface">4. Web Interface Guide</a></li>
+                <li><a href="#simulation">5. Simulation Controls</a></li>
+                <li><a href="#testing">6. Testing Interface</a></li>
+            </ul>
+            
+            <h3>Advanced Usage</h3>
+            <ul>
+                <li><a href="#parameters">7. Parameter Configuration</a></li>
+                <li><a href="#matlab-interface">8. MATLAB Interface</a></li>
+                <li><a href="#troubleshooting">9. Troubleshooting</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="overview">
+        <h2>1. System Overview</h2>
+        
+        <div class="feature-box">
+            <h3>What is the Flight Control Verification System?</h3>
+            <p>The Flight Control Verification system is a comprehensive aerospace engineering project that demonstrates professional-level skills in control systems, software engineering, and systems engineering. The system implements a complete quadcopter altitude control system following DO-178C principles.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Interactive Web Interface:</strong> Real-time simulation and parameter adjustment</li>
+                <li><strong>Comprehensive Testing:</strong> 1000+ automated test cases</li>
+                <li><strong>Professional Documentation:</strong> DO-178C compliant V&V reports</li>
+                <li><strong>MATLAB/Simulink Integration:</strong> Complete control system implementation</li>
+                <li><strong>Statistical Analysis:</strong> Monte Carlo validation and performance metrics</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>System Components</h3>
+            <ul>
+                <li><strong>Plant Dynamics:</strong> Quadcopter vertical dynamics model</li>
+                <li><strong>PID Controller:</strong> Altitude control with anti-windup</li>
+                <li><strong>Actuator Model:</strong> First-order lag dynamics</li>
+                <li><strong>Sensor Model:</strong> Altimeter with noise and quantization</li>
+                <li><strong>Disturbance Model:</strong> Wind gust generation</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="installation">
+        <h2>2. Installation Guide</h2>
+        
+        <div class="step-box">
+            <h4>Step 1: Prerequisites</h4>
+            <p>Ensure you have the following software installed:</p>
+            <ul>
+                <li>MATLAB R2023a or later</li>
+                <li>Simulink</li>
+                <li>Control System Toolbox</li>
+                <li>Simulink Test (optional)</li>
+                <li>Statistics and Machine Learning Toolbox (optional)</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h4>Step 2: Download and Setup</h4>
+            <p>Clone or download the project repository:</p>
+            <div class="code-block">
+                git clone https://github.com/yourusername/Flight-Control-Verification.git
+                cd Flight-Control-Verification
+            </div>
+        </div>
+
+        <div class="step-box">
+            <h4>Step 3: MATLAB Setup</h4>
+            <p>Run the setup script to initialize the project:</p>
+            <div class="code-block">
+                matlab -batch "run('matlab/setup_phase0.m')"
+            </div>
+        </div>
+
+        <div class="step-box">
+            <h4>Step 4: Web Interface</h4>
+            <p>Open the web interface in your browser:</p>
+            <div class="code-block">
+                open web/index.html
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>Important Notes</h4>
+            <ul>
+                <li>Ensure MATLAB is properly licensed and configured</li>
+                <li>Check that all required toolboxes are available</li>
+                <li>Verify the project path is correctly set</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="quick-start">
+        <h2>3. Quick Start Guide</h2>
+        
+        <div class="step-box">
+            <h4>Step 1: Open the Web Interface</h4>
+            <p>Navigate to the web interface and familiarize yourself with the layout:</p>
+            <ul>
+                <li><strong>Home:</strong> Project overview and introduction</li>
+                <li><strong>Simulation:</strong> Interactive parameter adjustment and real-time simulation</li>
+                <li><strong>Testing:</strong> Automated test execution and results</li>
+                <li><strong>Documentation:</strong> Access to all V&V reports and documentation</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h4>Step 2: Run Your First Simulation</h4>
+            <p>Go to the Simulation section and:</p>
+            <ol>
+                <li>Adjust the altitude command slider to 5.0m</li>
+                <li>Set the wind disturbance to 0.0 m/s</li>
+                <li>Click "Run Simulation"</li>
+                <li>Observe the altitude response in the chart</li>
+            </ol>
+        </div>
+
+        <div class="step-box">
+            <h4>Step 3: Explore Parameter Effects</h4>
+            <p>Try adjusting different parameters:</p>
+            <ul>
+                <li><strong>Mass:</strong> Change the quadcopter mass and observe the response</li>
+                <li><strong>Controller Gains:</strong> Adjust Kp, Ki, and Kd to see their effects</li>
+                <li><strong>Disturbances:</strong> Add wind gusts to test disturbance rejection</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h4>Step 4: Run Automated Tests</h4>
+            <p>Go to the Testing section and:</p>
+            <ol>
+                <li>Select the test categories you want to run</li>
+                <li>Click "Run Selected Tests"</li>
+                <li>Monitor the test progress and results</li>
+                <li>Review the test summary and detailed results</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section" id="web-interface">
+        <h2>4. Web Interface Guide</h2>
+        
+        <div class="feature-box">
+            <h3>Navigation</h3>
+            <p>The web interface is organized into five main sections:</p>
+            <ul>
+                <li><strong>Home:</strong> Project introduction and overview</li>
+                <li><strong>Simulation:</strong> Interactive simulation controls and results</li>
+                <li><strong>Testing:</strong> Automated test execution and analysis</li>
+                <li><strong>Documentation:</strong> Access to all project documentation</li>
+                <li><strong>About:</strong> Project details and technical information</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>Responsive Design</h3>
+            <p>The interface is designed to work on various devices:</p>
+            <ul>
+                <li><strong>Desktop:</strong> Full-featured interface with all controls</li>
+                <li><strong>Tablet:</strong> Optimized layout for touch interaction</li>
+                <li><strong>Mobile:</strong> Simplified interface with essential features</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>Browser Compatibility</h3>
+            <p>Supported browsers:</p>
+            <ul>
+                <li>Chrome 90+</li>
+                <li>Firefox 88+</li>
+                <li>Safari 14+</li>
+                <li>Edge 90+</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="simulation">
+        <h2>5. Simulation Controls</h2>
+        
+        <div class="feature-box">
+            <h3>Parameter Controls</h3>
+            <p>The simulation interface provides real-time control over system parameters:</p>
+            
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Range</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mass</td>
+                        <td>0.5 - 2.0 kg</td>
+                        <td>1.0 kg</td>
+                        <td>Quadcopter mass</td>
+                    </tr>
+                    <tr>
+                        <td>Kp</td>
+                        <td>0.1 - 5.0</td>
+                        <td>1.0</td>
+                        <td>Proportional gain</td>
+                    </tr>
+                    <tr>
+                        <td>Ki</td>
+                        <td>0.01 - 1.0</td>
+                        <td>0.1</td>
+                        <td>Integral gain</td>
+                    </tr>
+                    <tr>
+                        <td>Kd</td>
+                        <td>0.1 - 2.0</td>
+                        <td>0.5</td>
+                        <td>Derivative gain</td>
+                    </tr>
+                    <tr>
+                        <td>Command</td>
+                        <td>0 - 10 m</td>
+                        <td>5.0 m</td>
+                        <td>Altitude command</td>
+                    </tr>
+                    <tr>
+                        <td>Disturbance</td>
+                        <td>0 - 5 m/s</td>
+                        <td>0.0 m/s</td>
+                        <td>Wind disturbance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="feature-box">
+            <h3>Simulation Results</h3>
+            <p>The simulation provides four different views of the results:</p>
+            <ul>
+                <li><strong>Altitude Response:</strong> Shows altitude vs. time and command tracking</li>
+                <li><strong>Thrust Command:</strong> Displays the thrust command signal</li>
+                <li><strong>Control Error:</strong> Shows the control error over time</li>
+                <li><strong>Performance:</strong> Displays key performance metrics</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>Performance Metrics</h3>
+            <p>The system calculates and displays key performance metrics:</p>
+            <ul>
+                <li><strong>Overshoot:</strong> Maximum overshoot percentage</li>
+                <li><strong>Settling Time:</strong> Time to reach and stay within 2% of final value</li>
+                <li><strong>Rise Time:</strong> Time to go from 10% to 90% of final value</li>
+                <li><strong>Steady State Error:</strong> Final error between command and response</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="testing">
+        <h2>6. Testing Interface</h2>
+        
+        <div class="feature-box">
+            <h3>Test Categories</h3>
+            <p>The testing interface provides access to six test categories:</p>
+            <ul>
+                <li><strong>Nominal Operation Tests:</strong> Basic functionality verification</li>
+                <li><strong>Disturbance Rejection Tests:</strong> Wind gust rejection capability</li>
+                <li><strong>Noise Robustness Tests:</strong> Sensor noise immunity</li>
+                <li><strong>Actuator Failure Tests:</strong> Failure mode analysis</li>
+                <li><strong>Parameter Sensitivity Tests:</strong> Robustness to parameter variations</li>
+                <li><strong>Monte Carlo Analysis:</strong> Statistical validation</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>Test Execution</h3>
+            <p>To run tests:</p>
+            <ol>
+                <li>Select the test categories you want to run</li>
+                <li>Click "Run Selected Tests" or "Run All Tests"</li>
+                <li>Monitor the progress bar and status messages</li>
+                <li>Review the test summary and detailed results</li>
+            </ol>
+        </div>
+
+        <div class="feature-box">
+            <h3>Test Results</h3>
+            <p>The test results include:</p>
+            <ul>
+                <li><strong>Summary Statistics:</strong> Total tests, pass rate, and overall performance</li>
+                <li><strong>Detailed Results:</strong> Individual test results with metrics</li>
+                <li><strong>Performance Analysis:</strong> Key performance indicators</li>
+                <li><strong>Failure Analysis:</strong> Detailed analysis of any failed tests</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="parameters">
+        <h2>7. Parameter Configuration</h2>
+        
+        <div class="feature-box">
+            <h3>System Parameters</h3>
+            <p>The system uses several key parameters that can be configured:</p>
+            
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Symbol</th>
+                        <th>Value</th>
+                        <th>Units</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gravity</td>
+                        <td>g</td>
+                        <td>9.81</td>
+                        <td>m/s²</td>
+                        <td>Gravitational acceleration</td>
+                    </tr>
+                    <tr>
+                        <td>Drag Coefficient</td>
+                        <td>D</td>
+                        <td>0.1</td>
+                        <td>N·s/m</td>
+                        <td>Air resistance coefficient</td>
+                    </tr>
+                    <tr>
+                        <td>Thrust Gain</td>
+                        <td>ku</td>
+                        <td>10.0</td>
+                        <td>N</td>
+                        <td>Thrust force gain</td>
+                    </tr>
+                    <tr>
+                        <td>Actuator Time Constant</td>
+                        <td>τ</td>
+                        <td>0.1</td>
+                        <td>s</td>
+                        <td>Actuator response time</td>
+                    </tr>
+                    <tr>
+                        <td>Sensor Noise Variance</td>
+                        <td>σ²</td>
+                        <td>0.01</td>
+                        <td>m²</td>
+                        <td>Altimeter noise variance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="feature-box">
+            <h3>Controller Tuning</h3>
+            <p>The PID controller can be tuned using various methods:</p>
+            <ul>
+                <li><strong>Ziegler-Nichols:</strong> Classical tuning method</li>
+                <li><strong>Frequency Response:</strong> Bode and Nyquist analysis</li>
+                <li><strong>Root Locus:</strong> Pole placement method</li>
+                <li><strong>Optimization:</strong> fmincon optimization</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h4>Parameter Sensitivity</h4>
+            <p>The system is most sensitive to:</p>
+            <ul>
+                <li><strong>Proportional Gain (Kp):</strong> Affects response speed and overshoot</li>
+                <li><strong>Integral Gain (Ki):</strong> Affects steady-state error</li>
+                <li><strong>Derivative Gain (Kd):</strong> Affects stability and damping</li>
+                <li><strong>Mass:</strong> Affects overall system dynamics</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="matlab-interface">
+        <h2>8. MATLAB Interface</h2>
+        
+        <div class="feature-box">
+            <h3>Running Simulations from MATLAB</h3>
+            <p>You can run simulations directly from MATLAB:</p>
+            <div class="code-block">
+                % Run a basic simulation
+                run('matlab/implement_phase1.m');
+                
+                % Run controller tuning
+                run('matlab/tune_controller.m');
+                
+                % Run automated tests
+                run('matlab/run_phase2_tests.m');
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h3>Custom Simulations</h3>
+            <p>Create custom simulations with specific parameters:</p>
+            <div class="code-block">
+                % Set custom parameters
+                params.mass = 1.2;
+                params.kp = 1.5;
+                params.ki = 0.15;
+                params.kd = 0.6;
+                params.command = 6.0;
+                params.disturbance = 1.5;
+                
+                % Run simulation
+                results = run_custom_simulation(params);
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h3>Data Analysis</h3>
+            <p>Analyze simulation results and generate plots:</p>
+            <div class="code-block">
+                % Load simulation data
+                load('simulation_results.mat');
+                
+                % Plot altitude response
+                plot(time, altitude, 'b-', time, command, 'r--');
+                xlabel('Time (s)');
+                ylabel('Altitude (m)');
+                legend('Altitude', 'Command');
+                title('Altitude Response');
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="troubleshooting">
+        <h2>9. Troubleshooting</h2>
+        
+        <div class="feature-box">
+            <h3>Common Issues</h3>
+            <p>Here are solutions to common problems:</p>
+        </div>
+
+        <div class="warning-box">
+            <h4>Simulation Won't Start</h4>
+            <ul>
+                <li>Check that MATLAB is properly installed and licensed</li>
+                <li>Verify all required toolboxes are available</li>
+                <li>Ensure the project path is correctly set</li>
+                <li>Check for any error messages in the MATLAB command window</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <h4>Web Interface Not Loading</h4>
+            <ul>
+                <li>Check that you're using a supported browser</li>
+                <li>Ensure JavaScript is enabled</li>
+                <li>Check the browser console for any error messages</li>
+                <li>Try refreshing the page or clearing browser cache</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <h4>Tests Failing</h4>
+            <ul>
+                <li>Check that all dependencies are properly installed</li>
+                <li>Verify the simulation model is correctly compiled</li>
+                <li>Check the test configuration and parameters</li>
+                <li>Review the test logs for specific error messages</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h4>Getting Help</h4>
+            <p>If you encounter issues not covered in this guide:</p>
+            <ul>
+                <li>Check the project documentation in the docs/ folder</li>
+                <li>Review the MATLAB help documentation</li>
+                <li>Check the project README for additional information</li>
+                <li>Contact the development team for technical support</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>10. Conclusion</h2>
+        <p>This user guide provides comprehensive information about using the Flight Control Verification system. The system is designed to be user-friendly while providing powerful simulation and testing capabilities for aerospace engineering applications.</p>
+        
+        <p>For additional information, please refer to the other documentation files in the project, including the V&V report, test procedures, and maintenance guide.</p>
+    </div>
+</body>
+</html>

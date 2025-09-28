@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Control Verification - Interactive Demo</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.0/lib/browser/math.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-plane"></i>
+                <span>Flight Control Verification</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#simulation" class="nav-link">Simulation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testing" class="nav-link">Testing</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#documentation" class="nav-link">Documentation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Flight Control Verification</h1>
+                <p class="hero-subtitle">Interactive Quadcopter Altitude Control System</p>
+                <p class="hero-description">
+                    A comprehensive aerospace engineering project featuring a complete quadcopter altitude control system 
+                    with DO-178C compliant verification and validation. Experience real-time simulation, 
+                    automated testing, and professional documentation.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#simulation" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        Start Simulation
+                    </a>
+                    <a href="#testing" class="btn btn-secondary">
+                        <i class="fas fa-vial"></i>
+                        Run Tests
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="quadcopter-animation">
+                    <div class="quadcopter">
+                        <div class="propeller prop-1"></div>
+                        <div class="propeller prop-2"></div>
+                        <div class="propeller prop-3"></div>
+                        <div class="propeller prop-4"></div>
+                        <div class="body"></div>
+                    </div>
+                    <div class="altitude-indicator">
+                        <span class="altitude-value" id="altitude-display">0.0 m</span>
+                        <div class="altitude-bar">
+                            <div class="altitude-fill" id="altitude-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulation Section -->
+    <section id="simulation" class="simulation">
+        <div class="container">
+            <h2 class="section-title">Interactive Simulation</h2>
+            <p class="section-subtitle">Adjust parameters and observe real-time system response</p>
+            
+            <div class="simulation-container">
+                <div class="simulation-controls">
+                    <div class="control-panel">
+                        <h3>System Parameters</h3>
+                        
+                        <div class="parameter-group">
+                            <label for="mass">Mass (kg)</label>
+                            <input type="range" id="mass" min="0.5" max="2.0" step="0.1" value="1.0">
+                            <span class="parameter-value" id="mass-value">1.0</span>
+                        </div>
+                        
+                        <div class="parameter-group">
+                            <label for="kp">Proportional Gain (Kp)</label>
+                            <input type="range" id="kp" min="0.1" max="5.0" step="0.1" value="1.0">
+                            <span class="parameter-value" id="kp-value">1.0</span>
+                        </div>
+                        
+                        <div class="parameter-group">
+                            <label for="ki">Integral Gain (Ki)</label>
+                            <input type="range" id="ki" min="0.01" max="1.0" step="0.01" value="0.1">
+                            <span class="parameter-value" id="ki-value">0.1</span>
+                        </div>
+                        
+                        <div class="parameter-group">
+                            <label for="kd">Derivative Gain (Kd)</label>
+                            <input type="range" id="kd" min="0.1" max="2.0" step="0.1" value="0.5">
+                            <span class="parameter-value" id="kd-value">0.5</span>
+                        </div>
+                        
+                        <div class="parameter-group">
+                            <label for="command">Altitude Command (m)</label>
+                            <input type="range" id="command" min="0" max="10" step="0.5" value="5.0">
+                            <span class="parameter-value" id="command-value">5.0</span>
+                        </div>
+                        
+                        <div class="parameter-group">
+                            <label for="disturbance">Wind Disturbance (m/s)</label>
+                            <input type="range" id="disturbance" min="0" max="5" step="0.5" value="0">
+                            <span class="parameter-value" id="disturbance-value">0.0</span>
+                        </div>
+                        
+                        <div class="simulation-buttons">
+                            <button id="run-simulation" class="btn btn-primary">
+                                <i class="fas fa-play"></i>
+                                Run Simulation
+                            </button>
+                            <button id="reset-simulation" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="simulation-results">
+                    <div class="results-tabs">
+                        <button class="tab-btn active" data-tab="altitude">Altitude Response</button>
+                        <button class="tab-btn" data-tab="thrust">Thrust Command</button>
+                        <button class="tab-btn" data-tab="error">Control Error</button>
+                        <button class="tab-btn" data-tab="performance">Performance</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div id="altitude-tab" class="tab-pane active">
+                            <canvas id="altitude-chart"></canvas>
+                        </div>
+                        <div id="thrust-tab" class="tab-pane">
+                            <canvas id="thrust-chart"></canvas>
+                        </div>
+                        <div id="error-tab" class="tab-pane">
+                            <canvas id="error-chart"></canvas>
+                        </div>
+                        <div id="performance-tab" class="tab-pane">
+                            <div class="performance-metrics">
+                                <div class="metric-card">
+                                    <h4>Overshoot</h4>
+                                    <span class="metric-value" id="overshoot-value">0.0%</span>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Settling Time</h4>
+                                    <span class="metric-value" id="settling-time-value">0.0s</span>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Rise Time</h4>
+                                    <span class="metric-value" id="rise-time-value">0.0s</span>
+                                </div>
+                                <div class="metric-card">
+                                    <h4>Steady State Error</h4>
+                                    <span class="metric-value" id="steady-state-error-value">0.0m</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testing Section -->
+    <section id="testing" class="testing">
+        <div class="container">
+            <h2 class="section-title">Automated Testing Suite</h2>
+            <p class="section-subtitle">Comprehensive test execution and validation</p>
+            
+            <div class="testing-container">
+                <div class="test-controls">
+                    <h3>Test Configuration</h3>
+                    <div class="test-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="nominal-tests" checked>
+                            <span class="checkmark"></span>
+                            Nominal Operation Tests
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="disturbance-tests" checked>
+                            <span class="checkmark"></span>
+                            Disturbance Rejection Tests
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="noise-tests" checked>
+                            <span class="checkmark"></span>
+                            Noise Robustness Tests
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="failure-tests" checked>
+                            <span class="checkmark"></span>
+                            Actuator Failure Tests
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="parameter-tests" checked>
+                            <span class="checkmark"></span>
+                            Parameter Sensitivity Tests
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="monte-carlo-tests" checked>
+                            <span class="checkmark"></span>
+                            Monte Carlo Analysis
+                        </label>
+                    </div>
+                    
+                    <div class="test-buttons">
+                        <button id="run-tests" class="btn btn-primary">
+                            <i class="fas fa-play"></i>
+                            Run Selected Tests
+                        </button>
+                        <button id="run-all-tests" class="btn btn-secondary">
+                            <i class="fas fa-vial"></i>
+                            Run All Tests
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="test-results">
+                    <div class="test-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="test-progress"></div>
+                        </div>
+                        <span class="progress-text" id="progress-text">Ready to run tests</span>
+                    </div>
+                    
+                    <div class="test-summary" id="test-summary" style="display: none;">
+                        <h3>Test Summary</h3>
+                        <div class="summary-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Tests:</span>
+                                <span class="stat-value" id="total-tests">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Passed:</span>
+                                <span class="stat-value passed" id="passed-tests">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Failed:</span>
+                                <span class="stat-value failed" id="failed-tests">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Pass Rate:</span>
+                                <span class="stat-value" id="pass-rate">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="test-details" id="test-details">
+                        <!-- Test results will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="documentation">
+        <div class="container">
+            <h2 class="section-title">V&V Documentation</h2>
+            <p class="section-subtitle">Comprehensive verification and validation reports</p>
+            
+            <div class="documentation-grid">
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>V&V Report</h3>
+                    <p>Complete verification and validation report with executive summary</p>
+                    <a href="docs/final_vv_report.html" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Report
+                    </a>
+                </div>
+                
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-list-check"></i>
+                    </div>
+                    <h3>Requirements Traceability</h3>
+                    <p>Requirements traceability matrix mapping tests to requirements</p>
+                    <a href="docs/requirements_traceability_matrix.csv" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Download CSV
+                    </a>
+                </div>
+                
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Test Procedures</h3>
+                    <p>Detailed test procedures and execution guidelines</p>
+                    <a href="docs/test_procedures.html" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Procedures
+                    </a>
+                </div>
+                
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Test Results</h3>
+                    <p>Comprehensive test results and performance analysis</p>
+                    <a href="docs/test_results.html" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Results
+                    </a>
+                </div>
+                
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>User Guide</h3>
+                    <p>Complete user documentation and system guide</p>
+                    <a href="docs/user_guide.html" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Guide
+                    </a>
+                </div>
+                
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Maintenance Guide</h3>
+                    <p>System maintenance procedures and troubleshooting</p>
+                    <a href="docs/maintenance_guide.html" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About the Project</h2>
+            <p class="section-subtitle">A comprehensive aerospace engineering portfolio project</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Project Overview</h3>
+                    <p>
+                        The Flight Control Verification project is a comprehensive aerospace engineering portfolio project 
+                        that demonstrates professional-level skills in control systems, software engineering, and systems engineering. 
+                        The project implements a complete quadcopter altitude control system following DO-178C principles.
+                    </p>
+                    
+                    <h3>Technical Features</h3>
+                    <ul>
+                        <li><strong>Control System Design:</strong> PID controller with anti-windup and saturation</li>
+                        <li><strong>System Dynamics:</strong> Complete quadcopter vertical dynamics modeling</li>
+                        <li><strong>Sensor Modeling:</strong> Realistic altimeter with noise and quantization</li>
+                        <li><strong>Actuator Dynamics:</strong> First-order lag dynamics with saturation</li>
+                        <li><strong>Disturbance Modeling:</strong> Wind gust generation and rejection</li>
+                        <li><strong>Automated Testing:</strong> 1000+ test cases with statistical validation</li>
+                        <li><strong>V&V Documentation:</strong> DO-178C compliant verification and validation</li>
+                    </ul>
+                    
+                    <h3>Project Phases</h3>
+                    <div class="phases">
+                        <div class="phase">
+                            <div class="phase-number">0</div>
+                            <div class="phase-content">
+                                <h4>Project Setup</h4>
+                                <p>Professional project structure and requirements management</p>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-number">1</div>
+                            <div class="phase-content">
+                                <h4>Model Dynamics</h4>
+                                <p>Complete system implementation in Simulink</p>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-number">2</div>
+                            <div class="phase-content">
+                                <h4>Controller Tuning</h4>
+                                <p>Multi-method tuning and optimization</p>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-number">3</div>
+                            <div class="phase-content">
+                                <h4>Test Automation</h4>
+                                <p>Comprehensive V&V and documentation</p>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-number">4</div>
+                            <div class="phase-content">
+                                <h4>Web Client</h4>
+                                <p>Interactive web interface and deployment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-stats">
+                    <h3>Project Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">Test Cases</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Pass Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Requirements</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Files</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">10K+</div>
+                            <div class="stat-label">Lines of Code</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Phases</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Flight Control Verification</h3>
+                    <p>A comprehensive aerospace engineering portfolio project demonstrating professional-level skills in control systems, software engineering, and systems engineering.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#simulation">Simulation</a></li>
+                        <li><a href="#testing">Testing</a></li>
+                        <li><a href="#documentation">Documentation</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Technologies</h4>
+                    <ul>
+                        <li>MATLAB/Simulink</li>
+                        <li>Control Systems</li>
+                        <li>DO-178C V&V</li>
+                        <li>Web Development</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>For technical questions or collaboration opportunities, please contact the development team.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Flight Control Verification Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/simulation.js"></script>
+    <script src="js/testing.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

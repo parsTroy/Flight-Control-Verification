@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm install -g http-server
+        
+    - name: Build project
+      run: |
+        # Create build directory
+        mkdir -p build
+        
+        # Copy web files
+        cp -r web/* build/
+        
+        # Copy documentation
+        mkdir -p build/docs
+        cp -r web/docs/* build/docs/
+        
+        # Copy MATLAB files for reference
+        mkdir -p build/matlab
+        cp -r matlab/* build/matlab/
+        
+        # Copy requirements and config
+        cp requirements/* build/ 2>/dev/null || true
+        cp config/* build/ 2>/dev/null || true
+        
+        # Create index.html if it doesn't exist
+        if [ ! -f build/index.html ]; then
+          cp web/index.html build/
+        fi
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
+        cname: # Optional: add your custom domain here
+        
+    - name: Deploy to GitHub Pages (PR)
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.event_name == 'pull_request'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
+        destination_dir: pr-${{ github.event.number }}
