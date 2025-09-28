@@ -2,7 +2,7 @@
 
 A comprehensive web interface for the Flight Control Verification project, providing interactive simulation, automated testing, and professional documentation.
 
-## 🚀 Features
+## Features
 
 ### Interactive Simulation
 - **Real-time Parameter Adjustment**: Modify system parameters and see immediate results
@@ -28,7 +28,7 @@ A comprehensive web interface for the Flight Control Verification project, provi
 - **User Guide**: Complete system documentation and usage instructions
 - **Maintenance Guide**: System maintenance procedures and troubleshooting
 
-## 🛠 Technology Stack
+## Technology Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
 - **Charts**: Chart.js for dynamic data visualization
@@ -36,7 +36,7 @@ A comprehensive web interface for the Flight Control Verification project, provi
 - **Icons**: Font Awesome for professional icons
 - **Responsive Design**: Mobile-first approach with Bootstrap-inspired grid system
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 web/
@@ -57,7 +57,7 @@ web/
 └── README.md              # This file
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Option 1: Direct Access
 1. Open `index.html` in a modern web browser
@@ -74,7 +74,7 @@ web/
 2. GitHub Actions will automatically deploy to GitHub Pages
 3. Access via the provided URL
 
-## 🎯 Usage Guide
+## Usage Guide
 
 ### Simulation Interface
 1. **Adjust Parameters**: Use the sliders to modify system parameters
@@ -93,7 +93,7 @@ web/
 2. **Download Files**: Download CSV files and other resources
 3. **View Online**: Read HTML reports directly in the browser
 
-## 🔧 Configuration
+## Configuration
 
 ### System Parameters
 The simulation uses the following configurable parameters:
@@ -114,7 +114,7 @@ Tests can be configured through the web interface:
 - Configure test parameters
 - Set performance thresholds
 
-## 📊 Performance Metrics
+## Performance Metrics
 
 The system calculates and displays key performance metrics:
 
@@ -123,7 +123,7 @@ The system calculates and displays key performance metrics:
 - **Rise Time**: Time to go from 10% to 90% of final value (target: < 3s)
 - **Steady State Error**: Final error between command and response (target: < 0.05m)
 
-## 🧪 Test Results
+## Test Results
 
 The system provides comprehensive test results:
 
@@ -133,7 +133,7 @@ The system provides comprehensive test results:
 - **Failure Analysis**: Detailed analysis of any failures
 - **Requirements Verification**: Mapping of requirements to test results
 
-## 🔍 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -160,7 +160,7 @@ Supported browsers:
 - Safari 14+
 - Edge 90+
 
-## 📈 Future Enhancements
+## Future Enhancements
 
 Planned improvements:
 - **Real-time Collaboration**: Multiple users working simultaneously
@@ -169,7 +169,7 @@ Planned improvements:
 - **API Integration**: RESTful API for external access
 - **Mobile App**: Native mobile application
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please:
 
@@ -179,18 +179,18 @@ Contributions are welcome! Please:
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📞 Support
+## Support
 
 For technical support or questions:
 - Check the documentation in the docs/ folder
 - Review the troubleshooting section
 - Contact the development team
 
-## 🏆 Acknowledgments
+## Acknowledgments
 
 - **MATLAB/Simulink**: For the control system implementation
 - **Chart.js**: For dynamic data visualization
