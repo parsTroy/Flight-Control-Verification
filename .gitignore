@@ -1,0 +1,54 @@
+# MATLAB/Simulink files
+*.asv
+*.m~
+*.slxc
+*.autosave
+*.mlapp
+*.mltbx
+
+# Simulink cache and temporary files
+slprj/
+*.slx.autosave
+*.mdl.autosave
+
+# Generated files
+*.mex*
+*.p
+*.fig
+*.mat
+*.mexw64
+*.mexmaci64
+*.mexa64
+
+# Plot outputs (keep structure but ignore generated plots)
+plots/*.png
+plots/*.fig
+plots/*.jpg
+
+# Test results (keep structure but ignore generated data)
+test_results/*.txt
+test_results/*.mat
+test_results/*.csv
+
+# Documentation outputs
+docs/*.pdf
+docs/*.docx
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
