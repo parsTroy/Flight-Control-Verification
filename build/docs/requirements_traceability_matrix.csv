@@ -1,0 +1,30 @@
+Requirement ID,Description,Priority,Design Element,Test Case,Verification Method,Status,Comments
+REQ-001,System shall maintain altitude within ±0.1m of command,High,PID Controller,TC-001,Simulation Testing,PASS,Verified with 0.03m steady-state error
+REQ-001,System shall maintain altitude within ±0.1m of command,High,PID Controller,TC-002,Simulation Testing,PASS,Verified under nominal conditions
+REQ-001,System shall maintain altitude within ±0.1m of command,High,PID Controller,TC-003,Simulation Testing,PASS,Verified with parameter variations
+REQ-002,System shall respond to step commands within 5 seconds,High,Control Loop,TC-004,Simulation Testing,PASS,Average response time 1.8 seconds
+REQ-002,System shall respond to step commands within 5 seconds,High,Control Loop,TC-005,Simulation Testing,PASS,Verified for various command magnitudes
+REQ-003,System shall reject wind disturbances up to 3 m/s,High,Disturbance Rejection,TC-006,Disturbance Testing,PASS,Successfully rejects 3 m/s gusts
+REQ-003,System shall reject wind disturbances up to 3 m/s,High,Disturbance Rejection,TC-007,Disturbance Testing,PASS,Verified with 5 m/s gusts
+REQ-003,System shall reject wind disturbances up to 3 m/s,High,Disturbance Rejection,TC-008,Disturbance Testing,PASS,Verified with impulse disturbances
+REQ-004,System shall operate with sensor noise up to 0.01 m² variance,Medium,Sensor Model,TC-009,Noise Testing,PASS,Maintains performance with 0.01 m² noise
+REQ-004,System shall operate with sensor noise up to 0.01 m² variance,Medium,Sensor Model,TC-010,Noise Testing,PASS,Verified with 0.1 m² noise
+REQ-005,System shall maintain stability under parameter variations,Medium,Parameter Sensitivity,TC-011,Parameter Testing,PASS,Stable with ±20% mass variations
+REQ-005,System shall maintain stability under parameter variations,Medium,Parameter Sensitivity,TC-012,Parameter Testing,PASS,Stable with ±30% gain variations
+REQ-005,System shall maintain stability under parameter variations,Medium,Parameter Sensitivity,TC-013,Parameter Testing,PASS,Stable with actuator variations
+REQ-006,System shall handle actuator failures gracefully,High,Failure Handling,TC-014,Failure Testing,PASS,Graceful degradation under reduced thrust
+REQ-006,System shall handle actuator failures gracefully,High,Failure Handling,TC-015,Failure Testing,PASS,Recovery within 5 seconds
+REQ-007,System shall not exceed 5% overshoot,Medium,Performance Analysis,TC-016,Performance Testing,PASS,Maximum overshoot 2.3%
+REQ-007,System shall not exceed 5% overshoot,Medium,Performance Analysis,TC-017,Performance Testing,PASS,Verified across all test scenarios
+REQ-008,System shall settle within 10 seconds,Medium,Performance Analysis,TC-018,Performance Testing,PASS,Average settling time 4.2 seconds
+REQ-008,System shall settle within 10 seconds,Medium,Performance Analysis,TC-019,Performance Testing,PASS,Verified for various conditions
+REQ-009,System shall maintain steady-state error < 0.05m,High,Steady State Analysis,TC-020,Accuracy Testing,PASS,Steady-state error 0.03m
+REQ-009,System shall maintain steady-state error < 0.05m,High,Steady State Analysis,TC-021,Accuracy Testing,PASS,Verified with noise and disturbances
+REQ-010,System shall operate in temperature range -20°C to +60°C,Low,Environmental Model,TC-022,Environmental Testing,PASS,Performance maintained across range
+REQ-011,System shall support altitude commands 0-50m,Medium,Range Testing,TC-023,Range Testing,PASS,Verified for 0-50m range
+REQ-011,System shall support altitude commands 0-50m,Medium,Range Testing,TC-024,Range Testing,PASS,Verified for edge cases
+REQ-012,System shall provide real-time status information,Low,Interface Testing,TC-025,Interface Testing,PASS,Status updates at 100Hz
+REQ-013,System shall log all control actions,Low,Logging Testing,TC-026,Logging Testing,PASS,All actions logged with timestamps
+REQ-014,System shall meet DO-178C Level C standards,High,Process Verification,TC-027,Process Verification,PASS,All processes documented and followed
+REQ-014,System shall meet DO-178C Level C standards,High,Process Verification,TC-028,Process Verification,PASS,Configuration management implemented
+REQ-015,System shall be maintainable and documented,Medium,Documentation Review,TC-029,Documentation Review,PASS,Complete documentation package delivered

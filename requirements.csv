@@ -1,0 +1,16 @@
+ID,Category,Description,Priority,Verification_Method
+REQ-001,Functional,The system shall maintain altitude within ±0.5m of commanded altitude,High,Test
+REQ-002,Functional,The system shall respond to altitude commands within 2 seconds,High,Test
+REQ-003,Functional,The system shall reject disturbances (wind gusts) and return to commanded altitude,High,Test
+REQ-004,Functional,The system shall handle sensor noise without instability,Medium,Test
+REQ-005,Functional,The system shall provide smooth control output without excessive oscillations,Medium,Test
+REQ-006,Performance,The system shall maintain steady hover at ±5% power variation,High,Test
+REQ-007,Performance,The system shall recover from step disturbances within 5 seconds,High,Test
+REQ-008,Performance,The system shall maintain stability with sensor noise variance up to 0.1m,Medium,Test
+REQ-009,Safety,The system shall detect actuator failures and maintain safe operation,High,Test
+REQ-010,Safety,The system shall not exceed maximum thrust limits during normal operation,High,Test
+REQ-011,Interface,The system shall accept altitude commands in meters,High,Test
+REQ-012,Interface,The system shall provide altitude feedback with 0.1m resolution,Medium,Test
+REQ-013,Interface,The system shall output thrust commands in normalized units (0-1),High,Test
+REQ-014,Environmental,The system shall operate in wind gusts up to 5 m/s,Medium,Test
+REQ-015,Environmental,The system shall maintain performance in temperature range -20°C to +40°C,Low,Analysis

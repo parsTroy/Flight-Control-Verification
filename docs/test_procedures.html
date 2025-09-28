@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Procedures - Flight Control Verification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .test-procedure {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .test-procedure h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .test-step {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+        .test-step h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .expected-result {
+            background: #e8f5e8;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #4CAF50;
+        }
+        .test-data {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #ffc107;
+        }
+        .test-data table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .test-data th,
+        .test-data td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .test-data th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .pass-criteria {
+            background: #d4edda;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #28a745;
+        }
+        .fail-criteria {
+            background: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #dc3545;
+        }
+        .test-category {
+            background: #e3f2fd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+        .test-category h3 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Test Procedures</h1>
+        <p>Flight Control Verification Project</p>
+        <p>Comprehensive Test Execution Guidelines</p>
+    </div>
+
+    <div class="section">
+        <h2>1. Test Overview</h2>
+        <p>This document provides detailed test procedures for the Flight Control Verification project. All tests are designed to verify system requirements and ensure compliance with DO-178C Level C standards.</p>
+        
+        <div class="test-category">
+            <h3>Test Categories</h3>
+            <ul>
+                <li><strong>Functional Tests:</strong> Basic system functionality verification</li>
+                <li><strong>Performance Tests:</strong> Response time and accuracy validation</li>
+                <li><strong>Robustness Tests:</strong> Noise and disturbance rejection</li>
+                <li><strong>Safety Tests:</strong> Failure mode analysis and recovery</li>
+                <li><strong>Monte Carlo Tests:</strong> Statistical validation and analysis</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Test Environment Setup</h2>
+        <div class="test-procedure">
+            <h3>2.1 Prerequisites</h3>
+            <div class="test-step">
+                <h4>Step 1: Software Installation</h4>
+                <p>Ensure MATLAB R2023a or later is installed with the following toolboxes:</p>
+                <ul>
+                    <li>Simulink</li>
+                    <li>Control System Toolbox</li>
+                    <li>Simulink Test</li>
+                    <li>Statistics and Machine Learning Toolbox</li>
+                </ul>
+            </div>
+            
+            <div class="test-step">
+                <h4>Step 2: Project Setup</h4>
+                <p>Navigate to the project directory and run the setup script:</p>
+                <div class="test-data">
+                    <code>cd Flight-Control-Verification<br>
+                    matlab -batch "run('matlab/setup_phase0.m')"</code>
+                </div>
+            </div>
+            
+            <div class="test-step">
+                <h4>Step 3: Model Compilation</h4>
+                <p>Compile the Simulink model and verify all subsystems are properly connected:</p>
+                <div class="test-data">
+                    <code>matlab -batch "run('matlab/implement_phase1.m')"</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Functional Tests</h2>
+        
+        <div class="test-procedure">
+            <h3>TC-001: Step Response Test</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system response to step altitude commands</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Configure the system with nominal parameters:</p>
+                <div class="test-data">
+                    <table>
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Mass</td><td>1.0 kg</td></tr>
+                        <tr><td>Kp</td><td>1.0</td></tr>
+                        <tr><td>Ki</td><td>0.1</td></tr>
+                        <tr><td>Kd</td><td>0.5</td></tr>
+                        <tr><td>Command</td><td>5.0 m</td></tr>
+                        <tr><td>Disturbance</td><td>0.0 m/s</td></tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="test-step">
+                <h4>Execution</h4>
+                <p>Run the simulation for 20 seconds and record altitude response</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>System reaches commanded altitude within 5 seconds</li>
+                    <li>Steady-state error < 0.05m</li>
+                    <li>Overshoot < 5%</li>
+                    <li>No oscillations in steady state</li>
+                </ul>
+            </div>
+            
+            <div class="pass-criteria">
+                <strong>Pass Criteria:</strong> All expected results are met
+            </div>
+            
+            <div class="fail-criteria">
+                <strong>Fail Criteria:</strong> Any expected result is not met
+            </div>
+        </div>
+
+        <div class="test-procedure">
+            <h3>TC-002: Steady State Accuracy Test</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system maintains accurate altitude in steady state</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Use the same configuration as TC-001</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Execution</h4>
+                <p>Run simulation for 30 seconds and measure steady-state error</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Steady-state error < 0.1m</li>
+                    <li>Altitude variation < 0.05m</li>
+                    <li>Thrust command stable</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-procedure">
+            <h3>TC-003: Thrust Variation Test</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify thrust command variations are within acceptable limits</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Execution</h4>
+                <p>Run simulation and monitor thrust command variations</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Thrust command 0.4-0.6 (40-60%)</li>
+                    <li>Variation < 0.05 (5%)</li>
+                    <li>No saturation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. Disturbance Rejection Tests</h2>
+        
+        <div class="test-procedure">
+            <h3>TC-006: Wind Gust 1.0 m/s</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system rejects wind disturbances up to 1.0 m/s</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Apply wind disturbance of 1.0 m/s for 2 seconds</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Execution</h4>
+                <p>Run simulation with wind gust applied at t=10s</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Altitude deviation < 0.2m</li>
+                    <li>Recovery within 3 seconds</li>
+                    <li>No instability</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-procedure">
+            <h3>TC-007: Wind Gust 2.0 m/s</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system rejects wind disturbances up to 2.0 m/s</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Apply wind disturbance of 2.0 m/s for 2 seconds</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Altitude deviation < 0.5m</li>
+                    <li>Recovery within 5 seconds</li>
+                    <li>System remains stable</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-procedure">
+            <h3>TC-008: Wind Gust 3.0 m/s</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system rejects wind disturbances up to 3.0 m/s</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Apply wind disturbance of 3.0 m/s for 2 seconds</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Altitude deviation < 1.0m</li>
+                    <li>Recovery within 8 seconds</li>
+                    <li>System remains stable</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Noise Robustness Tests</h2>
+        
+        <div class="test-procedure">
+            <h3>TC-009: Sensor Noise 0.001 m²</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system operates with low-level sensor noise</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Add Gaussian noise with variance 0.001 m² to altitude sensor</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Performance degradation < 10%</li>
+                    <li>No instability</li>
+                    <li>Steady-state error < 0.1m</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-procedure">
+            <h3>TC-010: Sensor Noise 0.01 m²</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system operates with moderate sensor noise</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Add Gaussian noise with variance 0.01 m² to altitude sensor</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Performance degradation < 20%</li>
+                    <li>No instability</li>
+                    <li>Steady-state error < 0.15m</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Safety Tests</h2>
+        
+        <div class="test-procedure">
+            <h3>TC-014: Reduced Thrust Failure</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system handles reduced thrust gracefully</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Reduce maximum thrust to 70% of nominal value</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>System remains stable</li>
+                    <li>Graceful degradation</li>
+                    <li>Recovery within 10 seconds</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-procedure">
+            <h3>TC-015: Partial Actuator Failure</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Verify system handles partial actuator failure</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Reduce actuator response time by 50%</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>System remains stable</li>
+                    <li>Performance degradation acceptable</li>
+                    <li>No oscillations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>7. Monte Carlo Analysis</h2>
+        
+        <div class="test-procedure">
+            <h3>TC-100: Monte Carlo Analysis (1000 runs)</h3>
+            <div class="test-step">
+                <h4>Objective</h4>
+                <p>Perform statistical validation with parameter variations</p>
+            </div>
+            
+            <div class="test-step">
+                <h4>Test Setup</h4>
+                <p>Vary parameters within ±20% of nominal values:</p>
+                <div class="test-data">
+                    <table>
+                        <tr><th>Parameter</th><th>Nominal</th><th>Variation</th></tr>
+                        <tr><td>Mass</td><td>1.0 kg</td><td>±20%</td></tr>
+                        <tr><td>Kp</td><td>1.0</td><td>±20%</td></tr>
+                        <tr><td>Ki</td><td>0.1</td><td>±20%</td></tr>
+                        <tr><td>Kd</td><td>0.5</td><td>±20%</td></tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="test-step">
+                <h4>Execution</h4>
+                <p>Run 1000 Monte Carlo simulations with random parameter variations</p>
+            </div>
+            
+            <div class="expected-result">
+                <h4>Expected Results</h4>
+                <ul>
+                    <li>Success rate > 90%</li>
+                    <li>Mean performance within acceptable limits</li>
+                    <li>Statistical confidence > 95%</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>8. Test Execution Guidelines</h2>
+        
+        <div class="test-category">
+            <h3>8.1 Test Execution Order</h3>
+            <ol>
+                <li>Run functional tests first (TC-001 to TC-003)</li>
+                <li>Execute disturbance rejection tests (TC-006 to TC-008)</li>
+                <li>Perform noise robustness tests (TC-009 to TC-010)</li>
+                <li>Run safety tests (TC-014 to TC-015)</li>
+                <li>Execute Monte Carlo analysis (TC-100)</li>
+            </ol>
+        </div>
+        
+        <div class="test-category">
+            <h3>8.2 Test Data Collection</h3>
+            <ul>
+                <li>Record all simulation data in .mat files</li>
+                <li>Generate plots for each test case</li>
+                <li>Document any deviations from expected results</li>
+                <li>Maintain test execution logs</li>
+            </ul>
+        </div>
+        
+        <div class="test-category">
+            <h3>8.3 Test Reporting</h3>
+            <ul>
+                <li>Generate test summary report</li>
+                <li>Include performance metrics</li>
+                <li>Document any failures and root causes</li>
+                <li>Provide recommendations for improvements</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>9. Troubleshooting</h2>
+        
+        <div class="test-category">
+            <h3>9.1 Common Issues</h3>
+            <ul>
+                <li><strong>Simulation fails to start:</strong> Check MATLAB path and dependencies</li>
+                <li><strong>Model compilation errors:</strong> Verify all subsystems are properly connected</li>
+                <li><strong>Test failures:</strong> Review parameter settings and test conditions</li>
+                <li><strong>Performance issues:</strong> Check system resources and simulation settings</li>
+            </ul>
+        </div>
+        
+        <div class="test-category">
+            <h3>9.2 Support</h3>
+            <p>For technical support or questions about test procedures, please refer to the project documentation or contact the development team.</p>
+        </div>
+    </div>
+</body>
+</html>
